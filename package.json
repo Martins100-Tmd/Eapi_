@@ -40,7 +40,7 @@
     "client": "npm start --prefix frontend",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "deploy": "cd ./backend && npm install",
-    "build": "cd ./backend && npm install && cd ../frontend && npm install npm run build"
+    "build": "cd ./backend && npm install"
   },
   "keywords": [],
   "author": "",

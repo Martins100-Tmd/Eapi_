@@ -13,7 +13,7 @@ router.get(
   "/",
   asyncHandler(async (req, res) => {
     let token = req.headers.authorization.split(" ")[1];
-    let id = jwt.verify(token, secret.id);
+    let id = jwt.verify(token, secret).id;
     const goal = await Users.findById(id);
     goal
       ? res.status(200).json(goal)
@@ -107,7 +107,7 @@ router.post(
       req.headers.authorization.startsWith("Bearer")
     ) {
       token = req.headers.authorization.split(" ")[1];
-      id = jwt.verify(token, secret.id);
+      id = jwt.verify(token, secret).id;
       user = await Users.findById(id);
     }
     if (user && (await bcrypt.compare(password, user.password))) {
@@ -128,7 +128,7 @@ router.put(
       req.headers.authorization.startsWith("Bearer")
     ) {
       token = req.headers.authorization.split(" ")[1];
-      id = jwt.verify(token, secret.id);
+      id = jwt.verify(token, secret).id;
     } else {
       res.status(401).json({ message: "Not authorized", success: false });
       return;
@@ -185,7 +185,7 @@ router.put(
           req.headers.authorization.startsWith("Bearer")
         ) {
           id = req.headers.authorization.split(" ")[1];
-          id = jwt.verify(id, secret.id);
+          id = jwt.verify(id, secret).id;
           const user = await Users.findById(id);
           if (user) {
             if (req.body.password) {
@@ -233,7 +233,7 @@ router.delete(
       req.headers.authorization.startsWith("Bearer")
     ) {
       token = req.headers.authorization.split(" ")[1];
-      id = jwt.verify(token, secret.id);
+      id = jwt.verify(token, secret).id;
     } else {
       res.status(401).json({ message: "Not authorized", success: false });
       return;
@@ -263,7 +263,7 @@ router.delete(
         res.status(200).json({ success: true, user: user._id });
       } else if (KEYS.includes("dropOne")) {
         let token = req.headers.authorization.split(" ")[1];
-        let id = jwt.verify(token, secret.id);
+        let id = jwt.verify(token, secret).id;
         const user = await Users.findById(id);
         let { password } = req.body;
         let pass = user && (await bcrypt.compare(password, user.password));
