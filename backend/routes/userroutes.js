@@ -10,6 +10,13 @@ require("dotenv").config();
 const secret = process.env.SECRET || "ACB123";
 router.use(bodyParser.json());
 router.get(
+  "/one",
+  asyncHandler(async (req, res) => {
+    const goal = await Users.findOne({ __v: 0 });
+    res.status(200).json({ user: goal });
+  })
+);
+router.get(
   "/",
   asyncHandler(async (req, res) => {
     let token = req.headers.authorization.split(" ")[1];
