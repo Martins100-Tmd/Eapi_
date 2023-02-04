@@ -5,8 +5,6 @@
   "dependencies": {
     "bcrypt": "^5.1.0",
     "body-parser": "^1.20.1",
-    "chart.js": "^4.2.0",
-    "chartjs": "^0.3.24",
     "colors": "^1.4.0",
     "concurrently": "^7.6.0",
     "cors": "^2.8.5",
@@ -19,8 +17,6 @@
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.8.2",
     "nodemon": "^2.0.20",
-    "react-chartjs-2": "^5.2.0",
-    "react-router-dom": "^6.8.0",
     "saslprep": "^1.0.3",
     "send": "^0.18.0",
     "setprototypeof": "^1.2.0",
@@ -35,12 +31,8 @@
     "tslib": "^2.4.1"
   },
   "scripts": {
-    "start": "node Backend/Server.js",
-    "server": "nodemon Backend/Server.js",
-    "client": "npm start --prefix frontend",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "deploy": "cd ./backend && npm install",
-    "build": "cd ./backend && npm install"
+    "start": "nodemon backend/Server.js",
+    "build": "cd ./backend && npm install "
   },
   "keywords": [],
   "author": "",
