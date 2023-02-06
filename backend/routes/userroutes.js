@@ -20,7 +20,9 @@ router.get(
   "/",
   asyncHandler(async (req, res) => {
     let token = req.headers.authorization.split(" ")[1];
+    console.log([token]);
     let id = jwt.verify(token, secret).id;
+    console.log(id);
     const goal = await Users.findById(id);
     goal
       ? res.status(200).json(goal)
