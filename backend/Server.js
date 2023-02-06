@@ -1,6 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
-dotenv.config({ path: ".env" });
+const path = require("path");
+dotenv.config({ path: path.join(__dirname, "/.env") });
 const bodyParser = require("body-parser");
 const PORT = process.env.PORT || 5500;
 const { connectDB } = require("./config/DB");

@@ -16,7 +16,6 @@ function clock() {
 
   return hour + ":" + min + ":" + sec + " " + session;
 }
-console.log(clock());
 let dateModel = {
   day: ["Mon", "Teu", "Wed", "Thur", "Fri", "Sat", "Sun"],
   Month: [
@@ -41,6 +40,5 @@ function date() {
   let D = dateModel.day[new Date().getDay()];
   return `${D},${M} ${Y}`;
 }
-console.log(date());
 
 module.exports = { clock, date };

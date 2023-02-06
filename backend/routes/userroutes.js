@@ -6,8 +6,7 @@ const { clock, date } = require("./date");
 const router = express.Router();
 const asyncHandler = require("express-async-handler");
 const bodyParser = require("body-parser");
-require("dotenv").config();
-const secret = process.env.SECRET || "ACB123";
+const secret = process.env.SECRET;
 router.use(bodyParser.json());
 router.get(
   "/one",
