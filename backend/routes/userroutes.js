@@ -6,7 +6,7 @@ const { clock, date } = require("./date");
 const router = express.Router();
 const asyncHandler = require("express-async-handler");
 const bodyParser = require("body-parser");
-const secret = process.env.SECRET;
+const secret = process.env.SECRET || __ABC123;
 router.use(bodyParser.json());
 router.get(
   "/one",
@@ -19,9 +19,7 @@ router.get(
   "/",
   asyncHandler(async (req, res) => {
     let token = req.headers.authorization.split(" ")[1];
-    console.log([token]);
-    let id = jwt.verify(token, secret).id;
-    console.log(id);
+    let id = jwt.decode(token).id;
     const goal = await Users.findById(id);
     goal
       ? res.status(200).json(goal)
@@ -74,7 +72,7 @@ router.post(
         ],
       });
       let id = user._id;
-      const Token = jwt.sign({ id }, "ACB123", { expiresIn: "2d" });
+      const Token = jwt.sign({ id }, secret, { expiresIn: "100d" });
       res.status(200).json({
         user: `${user._id}`,
         message: "Account Registration Successful",
@@ -93,7 +91,7 @@ router.post(
     const userExist = await Users.findOne({ email });
     if (userExist && (await bcrypt.compare(password, userExist.password))) {
       const id = userExist._id;
-      const Token = jwt.sign({ id }, "ACB123", { expiresIn: "2d" });
+      const Token = jwt.sign({ id }, secret, { expiresIn: "100d" });
       res.status(200).json({
         success: true,
         name: userExist.name,
@@ -205,7 +203,7 @@ router.put(
             }
             const Salt = await bcrypt.genSalt(10);
             const HashedPassword = await bcrypt.hash(password, Salt);
-            const Token = jwt.sign({ id }, "ACB123", {
+            const Token = jwt.sign({ id }, secret, {
               expiresIn: "30d",
             });
             delete req.body.UpdateOne;
