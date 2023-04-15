@@ -18,6 +18,7 @@ app.use(
 app.use(bodyParser.json());
 app.use(errHandler);
 app.use("/users", require("./routes/userroutes"));
+
 connectDB().then(() => {
   app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
